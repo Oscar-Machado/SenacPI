@@ -1,8 +1,7 @@
 public class Vendas {
     private int idVenda;
-    private int idSessao;
-    private String dataHora;
-    private double valorTotal;
+    private String produto;
+    private double preco;
 
     public int getIdVenda() {
         return idVenda;
@@ -12,29 +11,19 @@ public class Vendas {
         this.idVenda = idVenda;
     }
 
-    public int getIdSessao() {
-        return idSessao;
+    public String getProduto() {
+        return produto;
     }
 
-    public void setIdSessao(int idSessao) {
-        this.idSessao = idSessao;
+    public void setProduto(String produto) {
+        this.produto = produto;
     }
 
-    public String getDataHora() {
-        return dataHora;
+    public double getPreco() {
+        return preco;
     }
 
-    public void setDataHora(String dataHora) {
-        this.dataHora = dataHora;
+    public void setPreco(double preco) {
+        this.preco = preco;
     }
-
-    public double getValorTotal() {
-        return valorTotal;
-    }
-
-    public void setValorTotal(double valorTotal) {
-        this.valorTotal = valorTotal;
-    }
-    
-    
 }

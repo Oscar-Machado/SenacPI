@@ -217,9 +217,7 @@ public class Agendamento extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgendarActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        AreaDeTrabalho_NoManager area = new AreaDeTrabalho_NoManager();
-        area.setVisible(true);
-        this.dispose();        // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_btnExitActionPerformed
 
     public static void main(String args[]) {

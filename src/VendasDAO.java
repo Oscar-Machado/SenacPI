@@ -8,12 +8,12 @@ class VendasDAO {
     
     public void vender(Vendas venda) {
         conn = new conectaDAO().connectDB();
-        String sql = "INSERT INTO Vendas (id_sessao, valor_total) VALUES (?, ?)";
+        String sql = "INSERT INTO Vendas (produto, preco) VALUES (?, ?)";
         
         try {
             prep = conn.prepareStatement(sql);
-            prep.setInt(1, venda.getIdSessao());
-            prep.setDouble(2, venda.getValorTotal());
+            prep.setString(1, venda.getProduto());
+            prep.setDouble(2, venda.getPreco());
             prep.executeUpdate();
             
             JOptionPane.showMessageDialog(null, "Venda registrada com sucesso!");
