@@ -12,7 +12,7 @@ public class conectaDAO {
         try {
         
             conn = DriverManager.getConnection(
-                "jdbc:mysql://localhost/cinemadb?useSSL=false&serverTimezone=UTC", 
+                "jdbc:mysql://localhost:3306/cinemadb?allowPublicKeyRetrieval=true&useSSL=false", 
                 "root", 
                 "mySQL121105");
             

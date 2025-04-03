@@ -1,4 +1,4 @@
-package Gui;
+
 
 public class AreaDeTrabalho extends javax.swing.JFrame {
 
@@ -170,7 +170,7 @@ public class AreaDeTrabalho extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgendamentoActionPerformed
 
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
-        Vendas vendas = new Vendas();
+        VendasGui vendas = new VendasGui();
         vendas.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVendasActionPerformed

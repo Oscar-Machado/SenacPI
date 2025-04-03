@@ -1,7 +1,6 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class FilmesDAO {
@@ -26,13 +25,59 @@ public class FilmesDAO {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar filme: " + e.getMessage());
         } finally {
-            try {
-                if (prep != null) prep.close();
-                if (conn != null) conn.close();
-            } catch (Exception e) {
-                System.out.println("Erro ao fechar conexão: " + e.getMessage());
-            }
+            fecharConexao();
         }
     }
     
+    public void atualizarFilme(int id, String novoTitulo) {
+        conn = new conectaDAO().connectDB();
+        String sql = "UPDATE Filmes SET titulo = ? WHERE id = ?";
+        
+        try {
+            prep = conn.prepareStatement(sql);
+            prep.setString(1, novoTitulo);
+            prep.setInt(2, id);
+            int atualizado = prep.executeUpdate();
+            
+            if (atualizado > 0) {
+                JOptionPane.showMessageDialog(null, "Filme atualizado com sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Nenhum filme encontrado com esse ID.");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar filme: " + e.getMessage());
+        } finally {
+            fecharConexao();
+        }
+    }
+    
+    public void excluirFilme(int id) {
+        conn = new conectaDAO().connectDB();
+        String sql = "DELETE FROM Filmes WHERE id = ?";
+        
+        try {
+            prep = conn.prepareStatement(sql);
+            prep.setInt(1, id);
+            int deletado = prep.executeUpdate();
+            
+            if (deletado > 0) {
+                JOptionPane.showMessageDialog(null, "Filme excluído com sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Nenhum filme encontrado com esse ID.");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao excluir filme: " + e.getMessage());
+        } finally {
+            fecharConexao();
+        }
+    }
+    
+    private void fecharConexao() {
+        try {
+            if (prep != null) prep.close();
+            if (conn != null) conn.close();
+        } catch (Exception e) {
+            System.out.println("Erro ao fechar conexão: " + e.getMessage());
+        }
+    }
 }
