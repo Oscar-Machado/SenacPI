@@ -31,7 +31,7 @@ public class FilmesDAO {
     
     public void atualizarFilme(int id, String novoTitulo) {
         conn = new conectaDAO().connectDB();
-        String sql = "UPDATE Filmes SET titulo = ? WHERE id = ?";
+        String sql = "UPDATE Filmes SET titulo = ? WHERE id_filme = ?";
         
         try {
             prep = conn.prepareStatement(sql);
@@ -53,7 +53,7 @@ public class FilmesDAO {
     
     public void excluirFilme(int id) {
         conn = new conectaDAO().connectDB();
-        String sql = "DELETE FROM Filmes WHERE id = ?";
+        String sql = "DELETE FROM Filmes WHERE id_filme = ?";
         
         try {
             prep = conn.prepareStatement(sql);

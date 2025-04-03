@@ -83,8 +83,18 @@ public class Cadastro extends javax.swing.JFrame {
         txtGenero.setText("jTextField3");
 
         btnAtualizar.setText("Atualizar");
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         txtID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -255,6 +265,37 @@ public class Cadastro extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Erro ao cadastrar filme: " + e.getMessage());
     }
     }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+    try {
+        int id = Integer.parseInt(txtID.getText());
+        String novoTitulo = txtTitulo.getText();
+
+        FilmesDAO dao = new FilmesDAO();
+        dao.atualizarFilme(id, novoTitulo);
+        
+        // Limpar os campos após atualizar
+        txtID.setText("");
+        txtTitulo.setText("");
+        
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "ID inválido!");
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Erro ao atualizar título: " + e.getMessage());
+    }
+    }//GEN-LAST:event_btnAtualizarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+    FilmesDAO dao = new FilmesDAO();
+    int id = Integer.parseInt(txtID.getText()); // Pega o ID do campo de texto
+
+    int confirmacao = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir este filme?", "Confirmação", JOptionPane.YES_NO_OPTION);
+    
+    if (confirmacao == JOptionPane.YES_OPTION) {
+        dao.excluirFilme(id);
+        JOptionPane.showMessageDialog(null, "Filme excluído com sucesso!");
+    }
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
