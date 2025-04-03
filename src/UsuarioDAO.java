@@ -4,9 +4,9 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 class UsuarioDAO {
-    public boolean validarLogin(String email, String senha) {
+    public String validarLogin(String email, String senha) {
         Connection conn = new conectaDAO().connectDB();
-        String sql = "SELECT * FROM Usuarios WHERE email = ? AND senha = ?";
+        String sql = "SELECT cargo FROM Usuarios WHERE email = ? AND senha = ?";
         
         try {
             PreparedStatement prep = conn.prepareStatement(sql);
@@ -15,7 +15,7 @@ class UsuarioDAO {
             ResultSet resultSet = prep.executeQuery();
             
             if (resultSet.next()) {
-                return true; 
+                return resultSet.getString("cargo"); // Retorna o cargo do usuário
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao validar login: " + e.getMessage());
@@ -26,6 +26,6 @@ class UsuarioDAO {
                 System.out.println("Erro ao fechar conexão: " + e.getMessage());
             }
         }
-        return false;
+        return null; // Retorna null caso o login falhe
     }
 }

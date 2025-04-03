@@ -1,4 +1,7 @@
 
+import javax.swing.JOptionPane;
+
+
 
 public class Login extends javax.swing.JFrame {
 
@@ -191,9 +194,22 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnContinueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinueActionPerformed
-            AreaDeTrabalho area = new AreaDeTrabalho();
-            area.setVisible(true);
-            this.dispose();
+    UsuarioDAO usuarioDAO = new UsuarioDAO();
+    
+    String cargo = usuarioDAO.validarLogin(txtLogin.getText(), txtSenha.getText());
+    
+    if (cargo != null) {
+        if (cargo.equals("Gerente")) {
+            new AreaDeTrabalho().setVisible(true);
+        } else if (cargo.equals("Atendente") || cargo.equals("Vendedor")) {
+            new AreaDeTrabalho_NoManager().setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Cargo não reconhecido.");
+        }
+        this.dispose(); // Fecha a tela atual
+    } else {
+        JOptionPane.showMessageDialog(null, "Login ou senha incorretos.", "Erro", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_btnContinueActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
