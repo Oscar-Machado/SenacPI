@@ -9,11 +9,11 @@ Em desenvolvimento
 - JDBC  
 - Swing (Interface gráfica)  
 
-## Time de Desenvolvedores  
+## Desenvolvedeor 
 - Oscar Machado 
 
 ## Objetivo do Software  
-O sistema tem como objetivo gerenciar vendas de produtos, permitindo o cadastro de usuários com diferentes permissões (Gerente, Atendente, Vendedor), além de registrar e consultar transações.  
+O sistema tem como objetivo gerenciar vendas de produtos, permitindo o cadastro de usuários com diferentes permissões (Gerente, Atendente, Vendedor), além de registrar e consultar transações em um cinema;  
 
 ## Funcionalidades do Sistema  
 - Login com autenticação de cargo  
