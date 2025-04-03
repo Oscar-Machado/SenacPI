@@ -1,7 +1,6 @@
 public class Sessao {
     private int idSessao;
     private int idFilme;
-    private int idSala;
     private String horario;
     private double preco;
 
@@ -19,14 +18,6 @@ public class Sessao {
 
     public void setIdFilme(int idFilme) {
         this.idFilme = idFilme;
-    }
-
-    public int getIdSala() {
-        return idSala;
-    }
-
-    public void setIdSala(int idSala) {
-        this.idSala = idSala;
     }
 
     public String getHorario() {

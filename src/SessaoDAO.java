@@ -12,14 +12,13 @@ public class SessaoDAO {
     
     public void cadastrarSessao(Sessao sessao) {
         conn = new conectaDAO().connectDB();
-        String sql = "INSERT INTO Sessoes (id_filme, id_sala, horario, preco) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO Sessoes (id_filme, horario, preco) VALUES (?, ?, ?)";
         
         try {
             prep = conn.prepareStatement(sql);
             prep.setInt(1, sessao.getIdFilme());
-            prep.setInt(2, sessao.getIdSala());
-            prep.setString(3, sessao.getHorario());
-            prep.setDouble(4, sessao.getPreco());
+            prep.setString(2, sessao.getHorario());
+            prep.setDouble(3, sessao.getPreco());
             prep.executeUpdate();
             
             JOptionPane.showMessageDialog(null, "Sessão cadastrada com sucesso!");
@@ -48,7 +47,6 @@ public class SessaoDAO {
                 Sessao sessao = new Sessao();
                 sessao.setIdSessao(rs.getInt("id_sessao"));
                 sessao.setIdFilme(rs.getInt("id_filme"));
-                sessao.setIdSala(rs.getInt("id_sala"));
                 sessao.setHorario(rs.getString("horario"));
                 sessao.setPreco(rs.getDouble("preco"));
                 listagem.add(sessao);

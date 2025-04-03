@@ -1,4 +1,7 @@
 
+import javax.swing.JOptionPane;
+
+
 
 public class Agendamento extends javax.swing.JFrame {
 
@@ -17,13 +20,11 @@ public class Agendamento extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         btnExit = new javax.swing.JButton();
         btnAgendar = new javax.swing.JButton();
         txtFilmeId = new javax.swing.JTextField();
-        txtSala = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtHora = new javax.swing.JTextField();
+        txtHorario = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtPreco = new javax.swing.JTextField();
 
@@ -96,8 +97,6 @@ public class Agendamento extends javax.swing.JFrame {
 
         jLabel1.setText("Filme Id");
 
-        jLabel2.setText("Sala");
-
         btnExit.setText("Exit (X)");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,11 +113,9 @@ public class Agendamento extends javax.swing.JFrame {
 
         txtFilmeId.setText("Sem banco de dados");
 
-        txtSala.setText("Clique em continue");
-
         jLabel5.setText("Horário");
 
-        txtHora.setText("jTextField3");
+        txtHorario.setText("jTextField3");
 
         jLabel6.setText("Preço:");
 
@@ -131,10 +128,6 @@ public class Agendamento extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtSala))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtFilmeId))
@@ -144,13 +137,13 @@ public class Agendamento extends javax.swing.JFrame {
                         .addComponent(btnAgendar))
                     .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtHora))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtPreco)))
+                        .addComponent(txtPreco))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 36, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -162,19 +155,15 @@ public class Agendamento extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtFilmeId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtSala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(txtHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnExit)
                     .addComponent(btnAgendar))
@@ -204,11 +193,31 @@ public class Agendamento extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgendarActionPerformed
-        // TODO add your handling code here:
+    try {
+        // Criar uma nova instância da Sessao
+        Sessao sessao = new Sessao();
+        
+        // Preencher os dados da sessão com os valores da interface gráfica
+        sessao.setIdFilme(Integer.parseInt(txtFilmeId.getText())); // ID do Filme
+        sessao.setHorario(txtHorario.getText()); // Apenas a hora, sem data
+        sessao.setPreco(Double.parseDouble(txtPreco.getText())); // Preço
+        
+        // Criar a instância do DAO e chamar o método para cadastrar
+        SessaoDAO dao = new SessaoDAO();
+        dao.cadastrarSessao(sessao);
+        
+        // Exibir mensagem de sucesso
+        JOptionPane.showMessageDialog(null, "Sessão agendada com sucesso!");
+
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "Erro: Verifique se os campos numéricos estão corretos!", "Erro", JOptionPane.ERROR_MESSAGE);
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Erro ao agendar sessão: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+    } 
     }//GEN-LAST:event_btnAgendarActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        AreaDeTrabalho area = new AreaDeTrabalho();
+        AreaDeTrabalho_NoManager area = new AreaDeTrabalho_NoManager();
         area.setVisible(true);
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_btnExitActionPerformed
@@ -227,7 +236,6 @@ public class Agendamento extends javax.swing.JFrame {
     private javax.swing.JButton btnAgendar;
     private javax.swing.JButton btnExit;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -237,8 +245,7 @@ public class Agendamento extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JTextField txtFilmeId;
-    private javax.swing.JTextField txtHora;
+    private javax.swing.JTextField txtHorario;
     private javax.swing.JTextField txtPreco;
-    private javax.swing.JTextField txtSala;
     // End of variables declaration//GEN-END:variables
 }
